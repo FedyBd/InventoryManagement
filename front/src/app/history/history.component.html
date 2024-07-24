@@ -1,0 +1,33 @@
+<div class="requests-container">
+  <h2>Modifications History</h2>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search by Stock Ref</mat-label>
+    <input matInput [(ngModel)]="searchQuery" placeholder="Enter stock reference" (input)="filterRequests()">
+  </mat-form-field>
+
+  <div class="requests-list">
+    <div class="request-item" *ngFor="let request of filteredRequests">
+      <mat-card class="request-card">
+        <mat-card-header>
+          <mat-card-title>Request ID: {{ request.id }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-card-content>
+            <p><mat-icon>person</mat-icon> <strong>Username:</strong> {{ request.user.name }}</p>
+            <p><mat-icon>label</mat-icon> <strong>Stock Ref:</strong> {{ request.stock.name }}</p>
+            <p><mat-icon>store</mat-icon> <strong>Magazine:</strong> {{ request.magazine.name }}</p>
+            <p [ngClass]="{'positive-change': request.difference > 0, 'negative-change': request.difference < 0}">
+              <mat-icon>swap_vert</mat-icon>
+              <strong>Change:</strong>
+              <span>
+              {{ request.difference }}
+            </span>
+            </p>
+            <p><mat-icon>event</mat-icon> <strong>Modified at:</strong> {{ request.submissionDate | date: 'short' }}</p>
+          </mat-card-content>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

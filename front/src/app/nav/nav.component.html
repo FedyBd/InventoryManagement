@@ -1,0 +1,56 @@
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="brand">
+      <img src="assets/logo.jpg" alt="Logo" class="logo">
+      <a routerLink="/home">Inventory</a>
+    </div>
+    <ul class="nav-links">
+      <li *ngIf="!isAuthenticated">
+        <a routerLink="/login">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+      </li>
+      <li *ngIf="!isHomeRoute">
+        <a routerLink="/home">
+          <i class="fas fa-home"></i> Home
+        </a>
+      </li>
+      <li *ngIf="!isAuthenticated">
+        <a routerLink="/register">
+          <i class="fas fa-user-plus"></i> Register
+        </a>
+      </li>
+      <li *ngIf="isAuthenticated && type && isHomeRoute">
+        <a (click)="scrollToSection('stock-visualization')">
+          <i class="fas fa-chart-bar"></i> Visualize Stock
+        </a>
+      </li>
+
+      <li *ngIf="isAuthenticated && !type">
+        <a routerLink="/stock-demands">
+          <i class="fas fa-box-open"></i> Stock Demands
+        </a>
+      </li>
+      <li *ngIf="isAuthenticated && type && isHomeRoute">
+        <a (click)="scrollToSection('stock-demands')">
+          <i class="fas fa-edit"></i> Request Forum
+        </a>
+      </li>
+      <li *ngIf="isAuthenticated && type">
+        <a routerLink="/history">
+          <i class="fas fa-history"></i> Stock Modifications
+        </a>
+      </li>
+      <li *ngIf="isAuthenticated">
+        <a routerLink="/profile">
+          <i class="fas fa-user"></i> Profile
+        </a>
+      </li>
+      <li *ngIf="isAuthenticated">
+        <a routerLink="/login" (click)="Logout()">
+          <i class="fas fa-sign-out-alt"></i> Log out
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>

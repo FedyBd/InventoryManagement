@@ -1,0 +1,67 @@
+<div class="landing-page" *ngIf="!authenticated">
+  <div class="welcome-section">
+    <div class="description">
+      <h2>Welcome to the Tunisian Post inventory management system</h2>
+      <p>This is a brief description of what we offer. We provide the best services for managing your stock and inventory needs.</p>
+    </div>
+    <div class="image">
+      <img src="assets/homeImage.png" alt="Welcome Image">
+    </div>
+  </div>
+
+  <div class="services-section">
+    <div class="service">
+      <h3>Stock Surveillance</h3>
+      <p>Monitor your stock levels in real-time and ensure you never run out of essential items.</p>
+    </div>
+    <div class="service">
+      <h3>Stock Demands</h3>
+      <p>Manage and respond to stock demands efficiently and keep your operations running smoothly.</p>
+    </div>
+    <div class="service">
+      <h3>Stock Delivery Tracking</h3>
+      <p>Track your deliveries and ensure timely and accurate stock arrivals.</p>
+    </div>
+  </div>
+</div>
+<div *ngIf="authenticated">
+<div class="landing-page" >
+  <div class="welcome-section">
+    <div class="description">
+      <h3>Welcome back <b>{{username}}</b> to the Tunisian Post inventory management system</h3>
+      <p>We're glad to see you again! Manage your inventory efficiently and keep track of your stock with ease.</p>
+    </div>
+    <div class="image">
+      <img src="assets/homeImage.png" alt="Welcome Image">
+    </div>
+  </div>
+  <div>
+    <p class="centered-text">{{ begin_message }} </p>
+  </div>
+  <div class="RelatedOffices" *ngIf="!isoffice">
+    <h2>Related Users</h2>
+    <div class="users-list">
+      <div class="user-card" *ngFor="let user of relatedUsers">
+        <div class="user-details">
+          <p><strong>ID:</strong> {{ user.id }}</p>
+          <p><strong>Name:</strong> {{ user.name }}</p>
+          <p><strong>Email:</strong> {{ user.email }}</p>
+          <p><strong>Magazine ID:</strong> {{ user.magasinId }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Stock Visualization Section -->
+<div *ngIf="isoffice" id="stock-visualization" class="stock-visualization">
+  <app-stocks></app-stocks>
+</div>
+
+<!-- Stock Demands Section -->
+<div *ngIf="isoffice" id="stock-demands" class="stock-demands">
+  <app-request></app-request>
+</div>
+</div>

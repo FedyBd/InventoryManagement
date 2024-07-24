@@ -1,0 +1,47 @@
+
+<div class="demands-container">
+  <h2>User's Stock Demands</h2>
+
+  <div class="filter-container">
+    <mat-form-field appearance="fill">
+      <mat-label>Filter by Status</mat-label>
+      <mat-select [(ngModel)]="selectedStatus" (selectionChange)="filterDemands()">
+        <mat-option value="">All</mat-option>
+        <mat-option value="NOT CHECKED">Not Checked</mat-option>
+        <mat-option value="CHECKING">Checking</mat-option>
+        <mat-option value="APPROVED">Approved</mat-option>
+        <mat-option value="REFUSED">Refused</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Search by Stock Name</mat-label>
+      <input matInput [(ngModel)]="searchStockName" (input)="filterDemands()" placeholder="Enter stock name">
+    </mat-form-field>
+  </div>
+
+  <div class="demands-list">
+    <div class="demand-item" *ngFor="let demand of filteredDemands">
+      <mat-card class="demand-card">
+        <mat-card-header>
+          <mat-card-title>Demand ID: {{ demand.id }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p><mat-icon>inventory</mat-icon> <strong>Stock:</strong> {{ demand.stock.name }}</p>
+          <p><mat-icon>person</mat-icon> <strong>User:</strong> {{ demand.user.name }}</p>
+          <p><mat-icon>request_quote</mat-icon> <strong>Quantity:</strong> {{ demand.quantity }}</p>
+          <p><mat-icon>store</mat-icon> <strong>Magazine:</strong> {{ demand.magazine.name }}</p>
+          <p><mat-icon>event</mat-icon> <strong>Submission Date:</strong> {{ demand.submissionDate | date: 'short' }}</p>
+          <p [ngClass]="{
+                'status-not-checked': demand.status === 'NOT CHECKED',
+                'status-checking': demand.status === 'CHECKING',
+                'status-approved': demand.status === 'APPROVED',
+                'status-refused': demand.status === 'REFUSED'
+              }">
+            <mat-icon>check_circle</mat-icon> <strong>Status:</strong> {{ demand.status }}
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

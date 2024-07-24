@@ -1,0 +1,46 @@
+<!-- profile.component.html -->
+<h3 class="text-center">
+  <mat-icon>warning</mat-icon> Please be careful when updating your profile ! ! !
+</h3>
+
+<form [formGroup]="form" (ngSubmit)="update()">
+  <div>
+    <mat-card class="container">
+      <mat-form-field appearance="fill">
+        <mat-label>ID</mat-label>
+        <mat-icon matPrefix>badge</mat-icon>
+        <input matInput formControlName="id">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <mat-icon matPrefix>person</mat-icon>
+        <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <mat-icon matPrefix>email</mat-icon>
+        <input matInput placeholder="Email" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Phone number</mat-label>
+        <mat-icon matPrefix>phone</mat-icon>
+        <input matInput placeholder="Phone number" formControlName="phone">
+      </mat-form-field>
+
+
+
+      <div class="button-group">
+        <button mat-raised-button color="primary" [disabled]="!form.valid" type="submit">
+          <mat-icon>check</mat-icon> Confirm
+        </button>
+        <button mat-button routerLink="/profile">
+          <mat-icon>cancel</mat-icon> Cancel
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</form>
+

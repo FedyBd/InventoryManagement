@@ -1,0 +1,55 @@
+<div class="stock-demands-container">
+  <h2>Manage Stock Demands</h2>
+
+  <!-- Filter Dropdown -->
+  <mat-form-field appearance="fill" class="filter-dropdown">
+    <mat-label>Filter by Status</mat-label>
+    <mat-select [(ngModel)]="filterStatus" (selectionChange)="filterDemands()">
+      <mat-option value="ALL">All</mat-option>
+      <mat-option value="NOT CHECKED">Not Checked</mat-option>
+      <mat-option value="CHECKING">Checking</mat-option>
+      <mat-option value="APPROVED">Approved</mat-option>
+      <mat-option value="REFUSED">Refused</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div class="demands-list">
+    <div *ngIf="filteredDemands.length === 0">No demands here</div>
+    <div class="demand-item" *ngFor="let demand of filteredDemands">
+      <mat-card class="demand-card">
+        <mat-card-header>
+          <div class="demand-id">Demand ID: {{ demand.id }}</div>
+        </mat-card-header>
+        <mat-card-content>
+          <p><mat-icon>inventory</mat-icon> <strong>Stock:</strong> {{ demand.stock.name }}</p>
+          <p><mat-icon>person</mat-icon> <strong>User:</strong> {{ demand.user.name }}</p>
+          <p><mat-icon>request_quote</mat-icon> <strong>Quantity:</strong> {{ demand.quantity }}</p>
+          <p><mat-icon>store</mat-icon> <strong>Magazine:</strong> {{ demand.magazine.name }}</p>
+          <p><mat-icon>event</mat-icon> <strong>Submission Date:</strong> {{ demand.submissionDate | date: 'short' }}</p>
+          <p [ngClass]="{
+                'status-not-checked': demand.status === 'NOT CHECKED',
+                'status-checking': demand.status === 'CHECKING',
+                'status-delivering': demand.status === 'APPROVED',
+                'status-refused': demand.status === 'REFUSED'
+              }">
+            <mat-icon>check_circle</mat-icon> <strong>Status:</strong> {{ demand.status }}
+          </p>
+
+          <!-- Status Dropdown -->
+          <mat-form-field appearance="fill">
+            <mat-label>Update Status</mat-label>
+            <mat-select [(ngModel)]="demand.status">
+              <mat-option value="NOT CHECKED">Not Checked</mat-option>
+              <mat-option value="CHECKING">Checking</mat-option>
+              <mat-option value="APPROVED">Approved</mat-option>
+              <mat-option value="REFUSED">Refused</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Confirm Button -->
+          <button mat-raised-button color="primary" (click)="confirmUpdate(demand)">Confirm</button>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

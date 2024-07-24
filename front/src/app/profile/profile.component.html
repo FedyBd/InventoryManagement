@@ -1,0 +1,30 @@
+<!-- profile.component.html -->
+<div *ngIf="!not_auth">
+  <div class="profile-container mat-elevation-z4">
+    <h2>User Profile</h2>
+    <mat-divider></mat-divider>
+    <div class="profile-details">
+      <div class="profile-item">
+        <mat-icon>person</mat-icon>
+        <label>Name:</label>
+        <span>{{ name }}</span>
+      </div>
+      <div class="profile-item">
+        <mat-icon>email</mat-icon>
+        <label>Email:</label>
+        <span>{{ email }}</span>
+      </div>
+      <div class="profile-item">
+        <mat-icon>phone</mat-icon>
+        <label>Phone:</label>
+        <span>{{ phone }}</span>
+      </div>
+      <div class="profile-item" *ngIf="!is_magazine">
+        <mat-icon>store</mat-icon>
+        <label>Magazine:</label>
+        <span>{{ magasin }}</span>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" routerLink="/update-profile">Modify</button>
+  </div>
+</div>
